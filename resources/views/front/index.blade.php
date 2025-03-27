@@ -13,7 +13,8 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Pinyon+Script&display=swap"
+        rel="stylesheet">
 
     <!-- Swiper Carousel -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
@@ -27,10 +28,15 @@
         background-attachment: fixed;
     }
 </style>
+</style>
 
 <body class="h-screen overflow-y-auto bg-gray-900 text-white">
-    <div class="bg-black bg-opacity-50 min-h-screen w-full flex flex-col items-center text-center px-10">
 
+    <!-- Cover modal -->
+    <x-cover :guest="$guest ?? (object)['name' => 'Tamu']" />
+
+    <div id="mainContent"
+        class="hidden bg-black bg-opacity-50 min-h-screen w-full flex flex-col items-center text-center px-10">
         <!-- Navbar -->
         <x-navbar />
 
@@ -60,6 +66,10 @@
 
         <!-- Modal -->
         <x-modal />
+
+        <!-- Audio Player -->
+        <x-audio />
+
     </div>
 
     <!-- Swiper JS -->
@@ -69,4 +79,5 @@
     @vite(['resources/js/app.js'])
 
 </body>
+
 </html>

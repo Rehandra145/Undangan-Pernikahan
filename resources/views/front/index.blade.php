@@ -30,6 +30,7 @@
 </style>
 </style>
 
+@vite(['resources/css/app.css'])
 <body class="h-screen overflow-y-auto bg-gray-900 text-white">
 
     <!-- Cover modal -->
@@ -41,16 +42,16 @@
         <x-navbar />
 
         <!-- Home Section -->
-        <x-home />
+        <x-home :event="$event ?? (object)[['groom_name'=>'Aqul'], ['bride_name'=>'nesa']]"/>
 
         <!-- Tujuan Section -->
         <x-tujuan />
 
         <!-- Date Section -->
-        <x-date />
+        <x-date :event="$event ?? (object)['date'=>'']"/>
 
         <!-- Location Section -->
-        <x-location />
+        <x-location  :event="$event ?? (object)['maps'=>'https://maps.app.goo.gl/DWwA6b31ZixSvJm29']"/>
 
         <!-- Gallery Section (Carousel) -->
         <x-gallery />

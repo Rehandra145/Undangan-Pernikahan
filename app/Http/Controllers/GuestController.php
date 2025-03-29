@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -45,14 +46,20 @@ class GuestController extends Controller
         return redirect()->route('guest.index')->with('success', 'Guest created successfully');
     }
 
-
     /**
      * Display the specified resource.
      */
     public function show($slug)
     {
         $guest = Guest::where('slug', $slug)->first();
-        return view('front.index', compact('guest', 'slug'));
+        $event = Event::first();
+
+        if ($event) {
+        preg_match('/src="([^"]+)"/', $event->embed_maps, $matches);
+        $event->embed_maps_url = $matches[1] ?? '';
+        }
+
+        return view('front.index', compact('guest', 'slug', 'event'));
     }
 
 

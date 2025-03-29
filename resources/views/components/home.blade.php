@@ -1,6 +1,7 @@
+@props(['event'])
 <section class="h-screen flex flex-col justify-center items-center">
     <h1 class="text-9xl font-serif italic font-light" style="font-family: 'Pinyon Script', serif;">
-        Aqul & Nesa
+        {{$event->groom_name ?? 'Aqul'}} & {{$event->bride_name ?? 'Nesa'}}
     </h1>
     <p class="text-xl font-serif mt-2" style="font-family: 'DM Serif Text', serif;">
         Get along with us in this beautiful moment

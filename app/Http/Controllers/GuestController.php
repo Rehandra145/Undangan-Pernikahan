@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Guest;
 use App\Models\Event;
+use App\Models\Story;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -53,13 +55,15 @@ class GuestController extends Controller
     {
         $guest = Guest::where('slug', $slug)->first();
         $event = Event::first();
+        $stories = Story::all();
+        $gallery = Gallery::all();
 
         if ($event) {
         preg_match('/src="([^"]+)"/', $event->embed_maps, $matches);
         $event->embed_maps_url = $matches[1] ?? '';
         }
 
-        return view('front.index', compact('guest', 'slug', 'event'));
+        return view('front.index', compact('guest', 'slug', 'event', 'stories', 'gallery'));
     }
 
 

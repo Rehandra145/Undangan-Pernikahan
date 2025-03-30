@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('caption');
-            $table->string('imagePath');
+            $table->longText('imagePath');
             $table->timestamps();
         });
     }

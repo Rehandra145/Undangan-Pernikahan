@@ -31,22 +31,26 @@ class StoryController extends Controller
     public function store(Request $request)
     {
         $maxInstance = 3;
+        // Count stories in the database before creating a new one
+        $storyCount = Story::count();
 
-        $validated= $request->validate([
+        // Check if the limit is already reached
+        if ($storyCount >= $maxInstance) {
+            return redirect()->route('stories.create')->with('error', 'Story limit reached. Please delete an existing story before adding a new one.');
+        }
+
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'caption' => 'required|string|max:255',
+            'caption' => 'required|string',
             'imagePath' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
         ]);
-
         $imageName = $request->file('imagePath')->getClientOriginalName();
         $imagePath = $request->file('imagePath')->storeAs('stories', $imageName, 'public');
-
         Story::create([
             'title' => $validated['title'],
             'caption' => $validated['caption'],
             'imagePath' => $imagePath
         ]);
-
         return redirect()->route('stories.index')->with('success', 'Story created successfully');
     }
 
@@ -63,7 +67,9 @@ class StoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('dashboard.story.edit', [
+            'story' => Story::findOrFail($id)
+        ]);
     }
 
     /**
@@ -71,14 +77,38 @@ class StoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'caption' => 'required|string',
+            'imagePath' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10000',
+        ]);
+
+        $story = Story::findOrFail($id);
+
+        if ($request->hasFile('imagePath')) {
+            if ($story->imagePath) {
+                Storage::disk('public')->delete($story->imagePath);
+            }
+            $imageName = $request->file('imagePath')->getClientOriginalName();
+            $imagePath = $request->file('imagePath')->storeAs('stories', $imageName, 'public');
+            $story->imagePath = $imagePath;
+        }
+        $story->title = $validated['title'];
+        $story->caption = $validated['caption'];
+        $story->save();
+
+        return redirect()->route('stories.index')->with('success', 'Story updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $story = Story::findOrFail($id);
+        Storage::disk('public')->delete($story->imagePath);
+        $story->delete();
+        return redirect()->route('stories.index')->with('success', 'Story deleted successfully');
     }
 }

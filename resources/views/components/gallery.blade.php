@@ -1,3 +1,4 @@
+@props(['gallery' => []])
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
@@ -23,15 +24,11 @@
 <section id="gallery" class="h-screen flex flex-col justify-center items-center px-10 text-center w-full">
     <div class="swiper-container max-w-6xl w-full relative">
         <div class="swiper-wrapper">
+            @foreach ($gallery as $item)
             <div class="swiper-slide">
-                <img src="{{ asset('storage/IMG_5069.JPG') }}" alt="Gallery 1" class="w-full h-auto rounded-lg shadow-lg">
+                <img src="{{Storage::url($item->path)}}" alt="Gallery 1" class="w-full h-auto rounded-lg shadow-lg">
             </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('storage/IMG_5106.JPG') }}" alt="Gallery 2" class="w-full h-auto rounded-lg shadow-lg">
-            </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('storage/IMG_5148.JPG') }}" alt="Gallery 3" class="w-full h-auto rounded-lg shadow-lg">
-            </div>
+            @endforeach
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>

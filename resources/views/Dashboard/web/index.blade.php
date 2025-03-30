@@ -41,8 +41,8 @@
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
             <!-- Banner / Header -->
             <div class="bg-gradient-to-r from-pink-200 to-purple-200 p-8 text-center">
-                <h2 class="text-3xl font-serif font-bold text-gray-800">{{ $event->groom_name }} &
-                    {{ $event->bride_name }}</h2>
+                <h2 class="text-3xl font-serif font-bold text-gray-800">{{ $event->groom_name ?? 'Aqul'}} &
+                    {{ $event->bride_name ?? 'Nesa'}}</h2>
                 <p class="text-gray-700 mt-2 italic">Undangan Pernikahan</p>
             </div>
 

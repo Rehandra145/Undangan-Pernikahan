@@ -51,13 +51,13 @@
         <x-date :event="$event ?? (object)['date'=>'']"/>
 
         <!-- Location Section -->
-        <x-location  :event="$event ?? (object)['maps'=>'https://maps.app.goo.gl/DWwA6b31ZixSvJm29']"/>
+        <x-location :event="$event ?? (object)['maps'=>'https://maps.app.goo.gl/DWwA6b31ZixSvJm29']"/>
 
         <!-- Gallery Section (Carousel) -->
-        <x-gallery />
+        <x-gallery :gallery="$gallery ?? (object)['path'=>'']"/>
 
         <!-- Story Section -->
-        <x-story />
+        <x-story :stories="$stories"/>
 
         <!-- Comment Section -->
         <x-comment />
@@ -66,7 +66,7 @@
         <x-gift />
 
         <!-- Modal -->
-        <x-modal />
+        <x-modal :stories="$stories"/>
 
         <!-- Audio Player -->
         <x-audio />

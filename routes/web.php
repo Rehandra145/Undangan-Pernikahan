@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\StoryController;
 
 Route::get('/', function () {
@@ -24,3 +25,11 @@ Route::get('/event/create', [WebController::class, 'create'])->name('web.create'
 Route::get('/stories', [StoryController::class, 'index'])->name('stories.index');
 Route::get('/stories/create', [StoryController::class, 'create'])->name('stories.create');
 Route::post('/stories/create', [StoryController::class, 'store'])->name('stories.store');
+Route::delete('/stories/delete/{id}', [StoryController::class, 'destroy'])->name('stories.delete');
+Route::get('/stories/edit/{id}', [StoryController::class, 'edit'])->name('stories.edit');
+Route::put('/stories/update/{id}', [StoryController::class, 'update'])->name('stories.update');
+
+//gallery
+Route::get('/galleries', [GalleryController::class, 'index'])->name('galleries.index');
+Route::post('/galleries', [GalleryController::class, 'store'])->name('galleries.store');
+Route::delete('/galleries/delete/{id}', [GalleryController::class, 'destroy'])->name('galleries.delete');

@@ -12,13 +12,10 @@
     <!-- Sidebar -->
     <x-sidebar />
     <div class="ml-64 flex-1 p-8 overflow-y-auto">
+        <x-session />
         <div class="flex justify-between items-center mb-8 ml-5">
             <h1 class="text-3xl font-bold text-gray-800">Tambah Story</h1>
         </div>
-
-        <!-- Menampilkan Error -->
-        <x-session />
-
         <!-- Form Tambah Story -->
         <div class="w-[58rem] ml-4 bg-white rounded-xl shadow-lg overflow-hidden p-8">
             <form action="{{ route('stories.store') }}" method="POST" id="form-edit-event" enctype="multipart/form-data">

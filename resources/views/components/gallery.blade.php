@@ -26,7 +26,9 @@
         <div class="swiper-wrapper">
             @foreach ($gallery as $item)
             <div class="swiper-slide">
-                <img src="{{Storage::url($item->path)}}" alt="Gallery 1" class="w-full h-auto rounded-lg shadow-lg">
+                <img src="{{ is_object($item) ? Storage::url($item->path) : asset('gallery/1743331796.jpg') }}"
+                     alt="Gallery 1"
+                     class="w-full h-auto rounded-lg shadow-lg">
             </div>
             @endforeach
         </div>

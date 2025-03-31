@@ -49,13 +49,13 @@
                                     <td class="px-6 py-4 border border-gray-200 text-center">
                                         <span class="inline-block px-3 py-1 text-sm font-semibold text-green-700 bg-green-100 rounded-full">Hadir</span>
                                     <td class="px-6 py-4 border border-gray-200 text-center">
-                                        <a href="#" class="text-blue-600 hover:text-blue-800">Edit</a>
-                                        |
-                                        <form action="#" method="POST" class="inline">
+                                        <a href="{{route('guest.edit', $guest->id)}}" class="py-2 px-5 bg-blue-500 rounded-lg text-white transition hover:bg-blue-600">Edit</a>
+                                        <form action="{{route('guest.delete', $guest->id)}}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-800">Delete</button>
+                                            <button type="submit" class="py-2 px-5 bg-red-500 rounded-lg text-white transition hover:bg-red-600">Delete</button>
                                         </form>
+                                        <a href="{{ url('/invitation/' . $guest->slug) }}" class="py-2 px-5 bg-green-500 rounded-lg text-white transition hover:bg-green-600">Share</a>
                                     </td>
                                 </tr>
                             @endforeach

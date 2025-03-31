@@ -7,11 +7,14 @@
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         <div class="relative z-20 p-6 text-white">
             <h2 id="modalTitle" class="text-3xl font-serif mb-4 text-center"></h2>
-            <div id="modalStory" class="text-lg max-h-60 overflow-y-auto overflow-x-hidden p-2 text-left break-words whitespace-normal">
+            <div id="modalStory"
+                class="text-lg max-h-60 overflow-y-auto overflow-x-hidden p-2 text-left break-words whitespace-normal">
                 <!-- Story content will be placed here -->
             </div>
             <div class="flex justify-center mt-4">
-                <button class="px-2 py-1 text-white border border-white rounded transition hover:bg-amber-50 hover:text-black" onclick="closeModal()">Close</button>
+                <button
+                    class="px-2 py-1 text-white border border-white rounded transition hover:bg-amber-50 hover:text-black"
+                    onclick="closeModal()">Close</button>
             </div>
         </div>
     </div>
@@ -19,12 +22,20 @@
     <script>
         // Convert PHP stories collection to JavaScript object
         const storiesData = {
-            @foreach($stories as $story)
-                '{{ $story->id }}': {
-                    title: '{{ $story->title }}',
-                    image: '{{ Storage::url($story->imagePath) }}',
-                    story: `{{ $story->caption }}`  // Using template literals for multiline support
-                },
+            @foreach ($stories as $story)
+                @if (is_object($story))
+                    '{{ $story->id }}': {
+                        title: '{{ $story->title }}',
+                        image: '{{ Storage::url($story->imagePath) }}',
+                        story: `{{ $story->caption }}` // Using template literals for multiline support
+                    },
+                @else
+                    '{{ $story }}': {
+                        title: 'Story',
+                        image: '{{ asset('placeholder-image.jpg') }}',
+                        story: `No content available`
+                    },
+                @endif
             @endforeach
         };
 

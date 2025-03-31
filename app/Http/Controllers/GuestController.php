@@ -72,22 +72,41 @@ class GuestController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $guest = Guest::findOrFail($id);
+        return view('dashboard.guest.edit', compact('guest'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255'
+        ]);
+
+        // Ubah huruf pertama setiap kata di 'name' menjadi kapital
+        $formattedName = ucwords(strtolower($request->name));
+
+        $guest = Guest::findOrFail($id);
+        $guest->update([
+            'name' => $formattedName,
+            'alamat' => $request->alamat
+        ]);
+
+        return redirect()->route('guest.index')->with('success', 'Guest updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $guest = Guest::findOrFail($id);
+        $guest->delete();
+
+        return redirect()->route('guest.index')->with('success', 'Guest deleted successfully');
     }
 }

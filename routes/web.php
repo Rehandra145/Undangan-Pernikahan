@@ -12,13 +12,16 @@ Route::get('/', function () {
 
 //tamu
 Route::get('/tamu', [GuestController::class, 'index'])->name('guest.index');
-Route::post('/create', [GuestController::class, 'store'])->name('guest.store');
-Route::get('/create', [GuestController::class, 'create'])->name('guest.create');
+Route::post('/tamu/create', [GuestController::class, 'store'])->name('guest.store');
+Route::get('/tamu/create', [GuestController::class, 'create'])->name('guest.create');
 Route::get('/invitation/{slug}', [GuestController::class, 'show']);
+Route::get('/tamu/edit/{id}', [GuestController::class, 'edit'])->name('guest.edit');
+Route::put('/tamu/edit/{id}', [GuestController::class, 'update'])->name('guest.update');
+Route::delete('/tamu/delete/{id}', [GuestController::class, 'destroy'])->name('guest.delete');
 
 //event
 Route::get('/dashboard', [WebController::class, 'index'])->name('web.index');
-Route::post('/event', [WebController::class, 'store'])->name('web.store');
+Route::post('/event/create', [WebController::class, 'store'])->name('web.store');
 Route::get('/event/create', [WebController::class, 'create'])->name('web.create');
 
 //story

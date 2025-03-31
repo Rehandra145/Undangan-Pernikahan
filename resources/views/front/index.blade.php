@@ -54,10 +54,15 @@
         <x-location :event="$event ?? (object)['maps'=>'https://maps.app.goo.gl/DWwA6b31ZixSvJm29']"/>
 
         <!-- Gallery Section (Carousel) -->
-        <x-gallery :gallery="$gallery ?? (object)['path'=>'']"/>
+        <x-gallery :gallery="$gallery ?? (object)['path'=>asset('gallery/1743331796.jpg')]"/>
 
         <!-- Story Section -->
-        <x-story :stories="$stories"/>
+
+        <x-story :stories="$stories ?? [
+            (object)['id' => 1, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')],
+            (object)['id' => 2, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')],
+            (object)['id' => 3, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')]
+        ]"/>
 
         <!-- Comment Section -->
         <x-comment />
@@ -66,7 +71,11 @@
         <x-gift />
 
         <!-- Modal -->
-        <x-modal :stories="$stories"/>
+        <x-modal :stories="$stories ?? [
+            (object)['id' => 1, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')],
+            (object)['id' => 2, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')],
+            (object)['id' => 3, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')]
+        ]"/>
 
         <!-- Audio Player -->
         <x-audio />

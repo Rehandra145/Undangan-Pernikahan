@@ -14,7 +14,7 @@
     <div class="ml-64 flex-1 p-8 overflow-y-auto">
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-gray-800">Story</h1>
-            <a href="{{ route('guest.create') }}"
+            <a href="{{ route('stories.create') }}"
                 class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd"

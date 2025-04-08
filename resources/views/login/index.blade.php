@@ -17,9 +17,9 @@
 
 <body>
   <!-- Full page background with overlay -->
-  <div class="min-h-screen flex bg-black bg-opacity-50 items-center justify-center bg-cover bg-center bg-fixed sm:bg-[url('{{ asset('storage/IMG_5090.JPG') }}')] bg-[url('{{ asset('storage/IMG_5125.JPG') }}')]">
+  <div class="min-h-screen flex overflow-hidden bg-black bg-opacity-50 items-center justify-center bg-cover bg-center bg-fixed sm:bg-[url('{{ asset('storage/IMG_5090.JPG') }}')] bg-[url('{{ asset('storage/IMG_5125.JPG') }}')]">
       <!-- Semi-transparent overlay -->
-      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+      <div class="absolute h-screen inset-0 bg-black bg-opacity-40"></div>
       
       <!-- Login container -->
       <div class="relative z-10 w-full max-w-md px-6 py-12 text-center text-white">

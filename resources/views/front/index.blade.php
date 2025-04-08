@@ -25,6 +25,7 @@
 @vite(['resources/css/app.css'])
 <body class="h-screen overflow-y-auto bg-gray-900 text-white bg-im">
 
+    <x-preload/>
     <!-- Cover modal -->
     <x-cover :guest="$guest ?? (object)['name' => 'Tamu']" />
 

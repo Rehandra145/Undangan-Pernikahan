@@ -9,7 +9,7 @@ class WebController extends Controller
 {
     public function index(){
         $event = Event::first();
-        return view('Dashboard.web.index', compact('event'));
+        return view('dashboard.web.index', compact('event'));
     }
 
     public function store(Request $request)
@@ -46,6 +46,6 @@ class WebController extends Controller
     }
 
     public function create(){
-        return view('Dashboard.web.create');
+        return view('dashboard.web.create');
     }
 }

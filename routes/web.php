@@ -7,7 +7,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\StoryController;
 
-Route::get('/',  [GuestController::class, 'index']);
+Route::get('/',  [GuestController::class, 'showNative']);
 
 Route::get('/invitation/{slug}', [GuestController::class, 'show']);
 

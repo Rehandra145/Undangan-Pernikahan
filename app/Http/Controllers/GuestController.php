@@ -16,16 +16,7 @@ class GuestController extends Controller
     public function index()
     {
         $guests = Guest::all();
-        $event = Event::first();
-        $stories = Story::all();
-        $gallery = Gallery::all();
-
-        if ($event) {
-        preg_match('/src="([^"]+)"/', $event->embed_maps, $matches);
-        $event->embed_maps_url = $matches[1] ?? '';
-        }
-
-        return view('front.index', compact('guests', 'event', 'stories', 'gallery'));
+        return view('dashboard.guest.index', compact('guests'));
     }
 
     /**
@@ -75,6 +66,20 @@ class GuestController extends Controller
         return view('front.index', compact('guest', 'slug', 'event', 'stories', 'gallery'));
     }
 
+    public function showNative()
+    {
+        $guests = Guest::all();
+        $event = Event::first();
+        $stories = Story::all();
+        $gallery = Gallery::all();
+
+        if ($event) {
+        preg_match('/src="([^"]+)"/', $event->embed_maps, $matches);
+        $event->embed_maps_url = $matches[1] ?? '';
+        }
+
+        return view('front.index', compact('guests', 'event', 'stories', 'gallery'));
+    }
 
     /**
      * Show the form for editing the specified resource.

@@ -16,7 +16,16 @@ class GuestController extends Controller
     public function index()
     {
         $guests = Guest::all();
-        return view('dashboard.guest.index', compact('guests'));
+        $event = Event::first();
+        $stories = Story::all();
+        $gallery = Gallery::all();
+
+        if ($event) {
+        preg_match('/src="([^"]+)"/', $event->embed_maps, $matches);
+        $event->embed_maps_url = $matches[1] ?? '';
+        }
+
+        return view('front.index', compact('guests', 'event', 'stories', 'gallery'));
     }
 
     /**

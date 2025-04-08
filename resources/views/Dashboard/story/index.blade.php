@@ -11,8 +11,8 @@
 
 <body class="bg-gray-50 flex h-screen overflow-hidden">
     <x-sidebar />
-    <div class="ml-64 flex-1 p-8 overflow-y-auto">
-        <div class="flex justify-between items-center mb-8">
+    <div class="flex-1 px-4 py-8 overflow-y-auto mt-5 lg:mt-0">
+        <div class="flex justify-between items-center mb-4">
             <h1 class="text-3xl font-bold text-gray-800">Story</h1>
             <a href="{{ route('stories.create') }}"
                 class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
@@ -30,7 +30,7 @@
                 <h2 class="text-3xl font-serif font-bold text-gray-800">Daftar Cerita</h2>
                 <p class="text-gray-700 mt-2 italic">Cerita yang ditampilkan</p>
             </div>
-            <div class="flex flex-wrap gap-4 p-6">
+            <div class="flex flex-wrap gap-4 p-6 justify-center">
                 @foreach ($stories as $story)
                     <div
                         class="w-[300px] h-[400px] transition-shadow shadow-md hover:shadow-indigo-200 rounded-lg p-4 bg-white">

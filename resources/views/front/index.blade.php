@@ -20,24 +20,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
 </head>
 
-<style>
-    body {
-        background-image: url("{{ asset('storage/IMG_5090.JPG') }}");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
-</style>
 </style>
 
 @vite(['resources/css/app.css'])
-<body class="h-screen overflow-y-auto bg-gray-900 text-white">
+<body class="h-screen overflow-y-auto bg-gray-900 text-white bg-im">
 
     <!-- Cover modal -->
     <x-cover :guest="$guest ?? (object)['name' => 'Tamu']" />
 
     <div id="mainContent"
-        class="hidden bg-black bg-opacity-50 min-h-screen w-full flex flex-col items-center text-center px-10">
+        class="hidden bg-black bg-opacity-50 min-h-screen w-full flex flex-col items-center text-center px-10 bg-cover bg-center bg-fixed sm:bg-[url('{{ asset('storage/IMG_5090.JPG') }}')] bg-[url('{{ asset('storage/IMG_5125.JPG') }}')]">
         <!-- Navbar -->
         <x-navbar />
 

@@ -12,7 +12,7 @@
     <!-- Improved Sidebar -->
     <x-sidebar />
     <!-- Main Content Area -->
-    <div class="ml-64 flex-1 p-8 overflow-y-auto">
+    <div class="flex-1 p-4 overflow-y-auto mt-6 lg:mt-0">
         <!-- Header Section -->
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>

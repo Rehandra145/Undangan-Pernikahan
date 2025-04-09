@@ -36,9 +36,9 @@
 <div id="welcomeModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 fade-in"
 style="background: url('{{asset('storage/IMG_5148.JPG')}}') center/cover no-repeat;">
 <div class="bg-opacity-100 p-10 rounded-lg shadow-lg max-w-lg text-center">
-    <h3 class="text-2xl sm:text-3xl font-bold mb-4" style="font-family: 'DM Serif Text', serif;">kepada</h3>
-    <h2 class="text-6xl sm:text-9xl mb-6" style="font-family: 'Pinyon Script', serif;">{{$guest->name ?? 'Hello'}}</h2>
-    <p class="text-white text-sm mt-2 mb-2" style="font-family: 'DM Serif Text', serif;">KAMI MENGUNDANG ANDA UNTUK HADIR DALAM ACARA YANG BAHAGIA INI</p>
+    <h3 class="text-2xl sm:text-3xl font-bold mb-4" style="font-family: 'DM Serif Text', serif;">Dear</h3>
+    <h2 class="text-6xl sm:text-9xl mb-4" style="font-family: 'Pinyon Script', serif;">{{$guest->name ?? 'Hello'}}</h2>
+    <p class="text-white text-base mt-2 mb-2 uppercase" style="font-family: 'DM Serif Text', serif;">Please be a Part of Our Hapies Moment</p>
     <button id="closeModal" class="mt-2 px-6 py-3 text-white hover:text-black border border-white rounded-lg hover:bg-white transition">Open</button>
 </div>
 </div>

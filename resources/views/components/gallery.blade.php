@@ -39,9 +39,24 @@
     .swiper-slide-active {
         opacity: 1;
     }
+    
+    .gallery-title {
+        font-family: 'DM Serif Text', serif;
+        margin-bottom: 2rem;
+    }
+    
+    .gallery-description {
+        font-family: 'DM Serif Text', serif;
+        margin-bottom: 3rem;
+        max-width: 600px;
+    }
 </style>
 
-<section id="gallery" class="min-h-screen py-16 flex flex-col justify-center items-center px-4 md:px-8 lg:px-10 text-center w-full">    
+<section id="gallery" class="min-h-screen py-16 flex flex-col justify-center items-center px-4 md:px-8 lg:px-10 text-center w-full">
+    <!-- Gallery Title -->
+    <h2 class="gallery-title text-3xl md:text-4xl lg:text-5xl mb-4">Gallery</h2>
+    <p class="gallery-description text-base md:text-lg opacity-80 mx-auto">Precious moments we've shared throughout our journey together</p>
+    
     <div class="w-full sm:w-11/12 md:w-4/5 lg:w-3/4 xl:w-2/3">
         <div class="gallery-container">
             <div class="swiper-container">

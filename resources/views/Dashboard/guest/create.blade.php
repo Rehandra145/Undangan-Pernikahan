@@ -10,9 +10,9 @@
     <!-- Improved Sidebar -->
     <x-sidebar />
     <!-- Main Content Area -->
-    <div class="ml-64 flex-1 p-8 overflow-y-auto">
+    <div class="flex-1 px-4 py-8 overflow-y-auto mt-6 lg:mt-0">
         <!-- Header Section -->
-        <div class="flex justify-between items-center mb-8">
+        <div class="flex justify-between items-center mb-4">
             <h1 class="text-3xl font-bold text-gray-800">Tambah Tamu</h1>
         </div>
 

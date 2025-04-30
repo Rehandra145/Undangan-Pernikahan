@@ -3,38 +3,77 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
 <style>
-    .swiper-container {
-        width: 60%;
-        max-width: 60%;
+    .gallery-container {
+        width: 100%;
+        max-width: 100%;
+        position: relative;
         overflow: hidden;
-    }
-
-    .swiper-slide {
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     .swiper-button-next,
     .swiper-button-prev {
         color: white;
     }
+    
+    .swiper-pagination-bullet {
+        background: rgba(255, 255, 255, 0.7);
+    }
+    
+    .swiper-pagination-bullet-active {
+        background: white;
+    }
+    
+    .gallery-image {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        max-height: 70vh;
+        border-radius: 0.5rem;
+    }
+    
+    .swiper-slide {
+        opacity: 0.4;
+        transition: opacity 0.3s;
+    }
+    
+    .swiper-slide-active {
+        opacity: 1;
+    }
+    
+    .gallery-title {
+        font-family: 'DM Serif Text', serif;
+        margin-bottom: 2rem;
+    }
+    
+    .gallery-description {
+        font-family: 'DM Serif Text', serif;
+        margin-bottom: 3rem;
+        max-width: 600px;
+    }
 </style>
 
-<section id="gallery" class="h-screen flex flex-col justify-center items-center px-10 text-center w-full">
-    <div class="swiper-container max-w-6xl w-full relative">
-        <div class="swiper-wrapper">
-            @foreach ($gallery as $item)
-            <div class="swiper-slide">
-                <img src="{{ is_object($item) ? Storage::url($item->path) : asset('gallery/1743331796.jpg') }}"
-                     alt="Gallery 1"
-                     class="w-full h-auto rounded-lg shadow-lg">
+<section id="gallery" class="min-h-screen py-16 flex flex-col justify-center items-center px-4 md:px-8 lg:px-10 text-center w-full">
+    <!-- Gallery Title -->
+    <h2 class="gallery-title text-3xl md:text-4xl lg:text-5xl mb-4">Gallery</h2>
+    <p class="gallery-description text-base md:text-lg opacity-80 mx-auto">Precious moments we've shared throughout our journey together</p>
+    
+    <div class="w-full sm:w-11/12 md:w-4/5 lg:w-3/4 xl:w-2/3">
+        <div class="gallery-container">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach ($gallery as $item)
+                    <div class="swiper-slide flex justify-center items-center">
+                        <img src="{{ is_object($item) ? Storage::url($item->path) : asset('gallery/1743331796.jpg') }}"
+                            alt="Gallery Image"
+                            class="gallery-image shadow-lg">
+                    </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination mt-4"></div>
             </div>
-            @endforeach
+            <div class="swiper-button-next hidden sm:flex"></div>
+            <div class="swiper-button-prev hidden sm:flex"></div>
         </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-pagination"></div>
     </div>
 </section>
 
@@ -54,8 +93,7 @@
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
-            slidesPerView: 1,
-            spaceBetween: 10,
+            slidesPerView: 1
         });
     });
 </script>

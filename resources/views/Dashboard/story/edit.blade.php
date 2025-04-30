@@ -11,13 +11,13 @@
 <body class="bg-gray-50 flex h-screen overflow-hidden">
     <!-- Sidebar -->
     <x-sidebar />
-    <div class="ml-64 flex-1 p-8 overflow-y-auto">
+    <div class="flex-1 px-4 py-8 overflow-y-auto mt-6 lg:mt-0">
         <x-session />
-        <div class="flex justify-between items-center mb-8 ml-5">
+        <div class="flex justify-between items-center mb-4">
             <h1 class="text-3xl font-bold text-gray-800">Edit {{$story->title}}</h1>
         </div>
         <!-- Form Tambah Story -->
-        <div class="w-[58rem] ml-4 bg-white rounded-xl shadow-lg overflow-hidden p-8">
+        <div class="w-full bg-white rounded-xl shadow-lg overflow-hidden p-8">
             <form action="{{ route('stories.update', $story->id) }}" method="POST" id="form-edit-event" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -38,7 +38,7 @@
                     <div id="selected-file-name" class="mt-2 text-gray-600"></div>
                     <div id="image-preview" class="mt-2">
                         @if ($story->imagePath)
-                            <img src="{{ asset('storage/' . $story->imagePath) }}" alt="Current Image" class="w-90 h-55 mt-2 rounded-lg">
+                            <img src="{{ asset('storage/' . $story->imagePath) }}" alt="Current Image" class="w-full max-w-lg h-auto mt-2 rounded-lg">
                         @endif
                     </div>
                 </div>

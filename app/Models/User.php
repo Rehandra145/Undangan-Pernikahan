@@ -39,6 +39,26 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
+    public function guests()
+    {
+        return $this->hasMany(Guest::class);
+    }
+
+    public function event()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    public function gallery()
+    {
+        return $this->hasMany(Gallery::class);
+    }
+
+    public function story()
+    {
+        return $this->hasMany(Story::class);
+    }
     protected function casts(): array
     {
         return [

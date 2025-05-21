@@ -52,14 +52,14 @@
                                     <td class="px-3 sm:px-6 py-4 border border-gray-200 text-center">
                                         <div class="flex flex-col sm:flex-row gap-2 justify-center">
                                             <a href="{{route('guest.edit', $guest->id)}}" class="py-2 px-4 bg-blue-500 rounded-lg text-white transition hover:bg-blue-600 text-sm sm:text-base w-full sm:w-auto">Edit</a>
-                                            
+
                                             <form action="{{route('guest.delete', $guest->id)}}" method="POST" class="w-full sm:w-auto">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="py-2 px-4 bg-red-500 rounded-lg text-white transition hover:bg-red-600 text-sm sm:text-base w-full">Delete</button>
                                             </form>
-                                            
-                                            <a href="{{ url('/invitation/' . $guest->slug) }}" class="py-2 px-4 bg-green-500 rounded-lg text-white transition hover:bg-green-600 text-sm sm:text-base w-full sm:w-auto">Share</a>
+
+                                            <a href="{{ url(auth()->id() . '/mengundang/' . $guest->slug) }}" class="py-2 px-4 bg-green-500 rounded-lg text-white transition hover:bg-green-600 text-sm sm:text-base w-full sm:w-auto">Share</a>
                                         </div>
                                     </td>
                                 </tr>

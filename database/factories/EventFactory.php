@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Nette\Utils\Random;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Event>
@@ -24,6 +25,7 @@ class EventFactory extends Factory
             'place' => $this->faker->address(),
             'maps' => $this->faker->url(),
             'embed_maps' => '<iframe src="' . $this->faker->url() . '" width="600" height="450"></iframe>',
+            'user_id' => 1
         ];
     }
 }

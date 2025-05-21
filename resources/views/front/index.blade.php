@@ -32,7 +32,7 @@
           });
           return urls;
         };
-    
+
         const preloadImages = (urls) => {
           const imagePromises = urls.map(url => new Promise(resolve => {
             const img = new Image();
@@ -42,16 +42,16 @@
           }));
           return Promise.all(imagePromises);
         };
-    
+
         // Tunggu hingga DOM + gambar + bg selesai dimuat
         window.addEventListener("load", async () => {
           const bgUrls = extractBgUrls();
-    
+
           const imgTags = Array.from(document.images).map(img => img.src);
           const allImages = [...new Set([...imgTags, ...bgUrls])];
-    
+
           await preloadImages(allImages);
-    
+
           // Sembunyikan preloader
           document.getElementById("preloader").style.display = "none";
           document.getElementById("content").style.display = "block";
@@ -70,54 +70,54 @@
     <div id="content" class="hidden">
         <!-- Cover modal -->
         <x-cover :guest="$guest ?? (object)['name' => 'Tamu']" />
-    
+
         <div id="mainContent"
             class="hidden bg-black bg-opacity-50 min-h-screen w-full flex flex-col items-center text-center px-10 bg-cover bg-center bg-fixed sm:bg-[url('{{ asset('storage/IMG_5090.JPG') }}')] bg-[url('{{ asset('storage/IMG_5125.JPG') }}')]">
             <!-- Navbar -->
             <x-navbar />
-    
+
             <!-- Home Section -->
             <x-home :event="$event ?? (object)[['groom_name'=>'Aqul'], ['bride_name'=>'nesa']]"/>
-    
+
             <!-- Tujuan Section -->
             <x-tujuan />
-            
+
             <!-- Informasi Section -->
             <x-information />
-    
+
             <!-- Date Section -->
             <x-date :event="$event ?? (object)['date'=>'']"/>
-    
+
             <!-- Location Section -->
             <x-location :event="$event ?? (object)['maps'=>'https://maps.app.goo.gl/DWwA6b31ZixSvJm29']"/>
-    
+
             <!-- Gallery Section (Carousel) -->
             <x-gallery :gallery="$gallery ?? (object)['path'=>asset('gallery/1743331796.jpg')]"/>
-    
+
             <!-- Story Section -->
-    
+
             <x-story :stories="$stories ?? [
                 (object)['id' => 1, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')],
                 (object)['id' => 2, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')],
                 (object)['id' => 3, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')]
             ]"/>
-    
+
             <!-- Comment Section -->
             <x-comment />
-    
+
             <!-- Gift Section -->
             <x-gift />
-    
+
             <!-- Modal -->
             <x-modal :stories="$stories ?? [
                 (object)['id' => 1, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')],
                 (object)['id' => 2, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')],
                 (object)['id' => 3, 'title'=> 'Akad', 'caption'=>'ini caption', 'imagePath' => asset('gallery/1743331796.jpg')]
             ]"/>
-    
+
             <!-- Audio Player -->
             <x-audio />
-    
+
         </div>
     </div>
 

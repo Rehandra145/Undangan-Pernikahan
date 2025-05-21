@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('place');
             $table->string('maps');
             $table->longText('embed_maps');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

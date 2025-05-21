@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GalleryController extends Controller
 {
@@ -12,7 +13,7 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        $gallery = Gallery::all();
+        $gallery = Gallery::where('user_id', Auth::id())->get();
         return view('dashboard.gallery.index', compact('gallery'));
     }
 
@@ -36,7 +37,8 @@ class GalleryController extends Controller
         $imageName = $request->file('path')->getClientOriginalName();
         $imagePath = $request->file('path')->storeAs('photos', $imageName, 'public');
         Gallery::create([
-            'path' => $imagePath
+            'path' => $imagePath,
+            'user_id' => Auth::id()
         ]);
 
 

@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Story;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GuestController extends Controller
 {
@@ -15,7 +16,7 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $guests = Guest::all();
+        $guests = Guest::where('user_id', Auth::id())->get();
         return view('dashboard.guest.index', compact('guests'));
     }
 
@@ -37,12 +38,12 @@ class GuestController extends Controller
             'alamat' => 'required|string|max:255'
         ]);
 
-        // Ubah huruf pertama setiap kata di 'name' menjadi kapital
         $formattedName = ucwords(strtolower($request->name));
 
         Guest::create([
             'name' => $formattedName,
-            'alamat' => $request->alamat
+            'alamat' => $request->alamat,
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('guest.index')->with('success', 'Guest created successfully');
@@ -51,9 +52,10 @@ class GuestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($slug)
+    public function show($id, $slug)
     {
-        $guest = Guest::where('slug', $slug)->first();
+        $guest = Guest::where("user_id", $id)->where("slug", $slug)->first();
+        // dd($slug);
         $event = Event::first();
         $stories = Story::all();
         $gallery = Gallery::all();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Story;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +14,7 @@ class StoryController extends Controller
      */
     public function index()
     {
-        $stories = Story::all();
+        $stories = Story::where('user_id', Auth::id())->get();
         return view('dashboard.story.index', compact('stories'));
     }
 
@@ -49,7 +50,8 @@ class StoryController extends Controller
         Story::create([
             'title' => $validated['title'],
             'caption' => $validated['caption'],
-            'imagePath' => $imagePath
+            'imagePath' => $imagePath,
+            'user_id' => Auth::id()
         ]);
         return redirect()->route('stories.index')->with('success', 'Story created successfully');
     }

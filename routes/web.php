@@ -7,12 +7,13 @@ use App\Http\Controllers\WebController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\StoryController;
 
-Route::get('/',  [GuestController::class, 'showNative']);
 
-Route::get('/invitation/{slug}', [GuestController::class, 'show']);
+Route::get('{id}/mengundang/{slug}', [GuestController::class, 'show']);
 
 Route::middleware('guest')->group(function() {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::get('/register', [AuthController::class, 'regis'])->name('register.register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login.login');
 });
 
@@ -27,7 +28,7 @@ Route::middleware('auth')->group(function() {
     Route::delete('/tamu/delete/{id}', [GuestController::class, 'destroy'])->name('guest.delete');
 
     //event
-    Route::get('/dashboard', [WebController::class, 'index'])->name('web.index');
+    Route::get('/', [WebController::class, 'index'])->name('web.index');
     Route::post('/event/create', [WebController::class, 'store'])->name('web.store');
     Route::get('/event/create', [WebController::class, 'create'])->name('web.create');
 

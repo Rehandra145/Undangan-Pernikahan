@@ -12,14 +12,11 @@ class WebController extends Controller
     {
         $pemilik = Auth::id();
         $event = Event::where("user_id", $pemilik)->first();
-
         if (!$event) {
             $user = Auth::user();
             $name = $user->name;
-
             $formatted_groom_name = "Aqul";
             $formatted_bride_name = "Nesa";
-
             $event = Event::create([
                 'groom_name' => $formatted_groom_name,
                 'bride_name' => $formatted_bride_name,
@@ -36,10 +33,6 @@ class WebController extends Controller
 
     public function store(Request $request)
     {
-        $maxInstances = 1;
-
-        Event::truncate();
-
         $request->validate([
             'groom_name' => 'required|string|max:255',
             'bride_name' => 'required|string|max:255',

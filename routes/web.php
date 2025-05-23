@@ -8,7 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\StoryController;
 
 
-Route::get('{id}/mengundang/{slug}', [GuestController::class, 'show']);
+Route::get('{id}/undangan/{slug}', [GuestController::class, 'show']);
 
 Route::middleware('guest')->group(function() {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function() {
     Route::get('/tamu/edit/{id}', [GuestController::class, 'edit'])->name('guest.edit');
     Route::put('/tamu/edit/{id}', [GuestController::class, 'update'])->name('guest.update');
     Route::delete('/tamu/delete/{id}', [GuestController::class, 'destroy'])->name('guest.delete');
+    Route::post('/tamu/rsvp/{id}', [GuestController::class, 'confirm'])->name('guest.rsvp');
+    Route::post('/tamu/comment/{id}', [GuestController::class, 'comment'])->name('guest.comment');
 
     //event
     Route::get('/', [WebController::class, 'index'])->name('web.index');

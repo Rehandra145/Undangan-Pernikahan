@@ -17,7 +17,11 @@ class GuestController extends Controller
     public function index()
     {
         $guests = Guest::where('user_id', Auth::id())->get();
-        return view('dashboard.guest.index', compact('guests'));
+        $total = Guest::where('user_id', Auth::id())->count();
+        $hadir = Guest::where('user_id', Auth::id())->where('status', 'hadir')->count();
+        $nggak = Guest::where('user_id', Auth::id())->where('status', 'tidak hadir')->count();
+        $belum = Guest::where('user_id', Auth::id())->where('status', 'menunggu')->count();
+        return view('dashboard.guest.index', compact('guests', 'total', 'hadir', 'nggak', 'belum'));
     }
 
     /**
@@ -54,6 +58,7 @@ class GuestController extends Controller
      */
     public function show($id, $slug)
     {
+        $comments = Guest::where('user_id', Auth::id())->whereNotNull('comment')->where('comment', '!=', '')->get();
         $guest = Guest::where("user_id", $id)->where("slug", $slug)->first();
         // dd($slug);
         $event = Event::first();
@@ -65,7 +70,7 @@ class GuestController extends Controller
         $event->embed_maps_url = $matches[1] ?? '';
         }
 
-        return view('front.index', compact('guest', 'slug', 'event', 'stories', 'gallery'));
+        return view('front.index', compact('guest', 'slug', 'event', 'stories', 'gallery', 'comments'));
     }
 
     public function showNative()
@@ -124,5 +129,25 @@ class GuestController extends Controller
         $guest->delete();
 
         return redirect()->route('guest.index')->with('success', 'Guest deleted successfully');
+    }
+
+    public function confirm(Request $request, $id)
+    {
+        $guest = Guest::findOrFail($id);
+        $guest->update([
+            'status' => $request->status
+        ]);
+
+        return back()->with('success', 'Status updated successfully');
+    }
+
+    public function comment(Request $request, $id)
+    {
+        $guest = Guest::findOrFail($id);
+        $guest->update([
+            'comment' => $request->comment
+        ]);
+
+        return back()->with('success', 'Comment updated successfully')->withFragment('comment');
     }
 }

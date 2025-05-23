@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('alamat');
+            $table->enum('status', ['hadir', 'tidak hadir', 'menunggu'])->default('menunggu');
+            $table->longText('comment')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

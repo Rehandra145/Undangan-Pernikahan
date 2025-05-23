@@ -103,7 +103,7 @@
             ]"/>
 
             <!-- Comment Section -->
-            <x-comment />
+            <x-comment :guest="$guest" :comments="$comments" />
 
             <!-- Gift Section -->
             <x-gift />

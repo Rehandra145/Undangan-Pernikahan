@@ -18,10 +18,11 @@ class GuestController extends Controller
     {
         $guests = Guest::where('user_id', Auth::id())->get();
         $total = Guest::where('user_id', Auth::id())->count();
+        $pagin = Guest::where('user_id', Auth::id())->paginate(10);
         $hadir = Guest::where('user_id', Auth::id())->where('status', 'hadir')->count();
         $nggak = Guest::where('user_id', Auth::id())->where('status', 'tidak hadir')->count();
         $belum = Guest::where('user_id', Auth::id())->where('status', 'menunggu')->count();
-        return view('dashboard.guest.index', compact('guests', 'total', 'hadir', 'nggak', 'belum'));
+        return view('dashboard.guest.index', compact('guests', 'total', 'hadir', 'nggak', 'belum', 'pagin'));
     }
 
     /**

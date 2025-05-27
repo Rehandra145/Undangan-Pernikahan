@@ -6,6 +6,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\StoryController;
+use App\Http\Controllers\ExcelController;
 
 
 Route::get('{id}/undangan/{slug}', [GuestController::class, 'show']);
@@ -46,5 +47,10 @@ Route::middleware('auth')->group(function() {
     Route::get('/galleries', [GalleryController::class, 'index'])->name('galleries.index');
     Route::post('/galleries', [GalleryController::class, 'store'])->name('galleries.store');
     Route::delete('/galleries/delete/{id}', [GalleryController::class, 'destroy'])->name('galleries.delete');
+
+    //excel
+    Route::get('/export-users', [ExcelController::class, 'export'])->name('guest.export');
+    Route::post('/import', [ExcelController::class, 'import'])->name('guest.import');
+
 });
 

@@ -9,7 +9,7 @@
 
     <div class="w-full max-w-4xl flex flex-col md:flex-row gap-6">
         <div class="w-full md:w-2/3 flex flex-col">
-            <form method="POST" action="{{ route('guest.comment', $guest->id) }}">
+            <form method="POST" action="{{ route('guest.comment', $guest->id ?? '1') }}">
                 @csrf
                 <textarea name="comment"
                     class="w-full md:w-[700px] h-[350px] p-4 bg-transparent border border-white rounded-lg text-white placeholder-white focus:outline-none resize-none"
@@ -20,14 +20,14 @@
                         Kirim
                     </button>
             </form>
-            <form action="{{ route('guest.rsvp', $guest->id) }}" method="post">
+            <form action="{{ route('guest.rsvp', $guest->id ?? '1') }}" method="post">
                 @csrf
                 <button name="status" value="hadir"
                     class="px-6 py-2 text-white font-semibold rounded-lg border border-white hover:bg-green-300 hover:text-black">
                     Hadir
                 </button>
             </form>
-            <form action="{{ route('guest.rsvp', $guest->id) }}" method="post">
+            <form action="{{ route('guest.rsvp', $guest->id ?? '') }}" method="post">
                 @csrf
                 <button name="status" value="tidak hadir"
                     class="px-6 py-2 text-white font-semibold rounded-lg border border-white hover:bg-red-300 hover:text-black">
@@ -41,8 +41,8 @@
         <h2 class="text-white font-bold text-left">Komentar</h2>
         @foreach ($comments as $comment)
             <div class="flex flex-col">
-                <p class="text-white font-bold text-left">{{ $comment->name }}</p>
-                <p class="text-white text-sm text-left">{{ $comment->comment }}</p>
+                <p class="text-white font-bold text-left">{{ $comment->name ?? ''}}</p>
+                <p class="text-white text-sm text-left">{{ $comment->comment ?? ''}}</p>
             </div>
         @endforeach
     </div>

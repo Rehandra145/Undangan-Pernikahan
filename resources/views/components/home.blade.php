@@ -4,7 +4,7 @@
         The wedding of
     </p>
     <h1 class="text-8xl md:text-9xl font-serif italic font-light" style="font-family: 'Pinyon Script', serif;">
-        {{$event->groom_name ?? 'Aqul'}} & {{$event->bride_name ?? 'Nesa'}}
+        {{$event->groom_daily_name ?? 'Aqul'}} & {{$event->bride_daily_name ?? 'Nesa'}}
     </h1>
     <p class="text-xl font-serif mt-2" style="font-family: 'DM Serif Text', serif;">
         Get along with us in this beautiful moment

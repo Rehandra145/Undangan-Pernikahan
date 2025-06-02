@@ -22,12 +22,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // User::factory()->create([
-        //     'username' => 'aqul',
-        //     'name' => 'Test User',
-        //     'email' => 'admin@example.com',
-        // ]);
-
-        Event::factory(1)->create();
     }
 }

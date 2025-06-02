@@ -32,8 +32,9 @@ Route::middleware('auth')->group(function() {
 
     //event
     Route::get('/', [WebController::class, 'index'])->name('web.index');
-    Route::post('/event/create', [WebController::class, 'store'])->name('web.store');
+    Route::post('/event/create', [WebController::class, 'update'])->name('web.store');
     Route::get('/event/create', [WebController::class, 'create'])->name('web.create');
+    Route::get('/get-ayat/{surah}', [WebController::class, 'getAyat'])->name('get.ayat');
 
     //story
     Route::get('/stories', [StoryController::class, 'index'])->name('stories.index');

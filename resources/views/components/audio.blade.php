@@ -5,7 +5,7 @@
 </div>
 
 <audio id="bgMusic" loop autoplay>
-    <source src="{{ asset('storage/yung kai - blue.mp3') }}" type="audio/mpeg">
+    <source src="{{ asset('storage/' . ($event->bgm ?? '')) }}" type="audio/mpeg">
     Browser tidak mendukung audio.
 </audio>
 

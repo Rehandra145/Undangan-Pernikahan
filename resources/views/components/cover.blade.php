@@ -1,4 +1,4 @@
-@props(['guest'])
+@props(['event','guest'])
 
 <style>
         .fade-in {
@@ -33,8 +33,8 @@
         }
     }
 </style>
-<div id="welcomeModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 fade-in"
-style="background: url('{{asset('storage/IMG_5148.JPG')}}') center/cover no-repeat;">
+<div id="welcomeModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70s fade-in"
+style="background: url('{{ asset('storage/' . ($event->CvImgBg ?? 'default.jpg')) }}') center/cover no-repeat;">
 <div class="bg-opacity-100 p-10 rounded-lg shadow-lg max-w-lg text-center">
     <h3 class="text-2xl sm:text-3xl font-bold mb-4" style="font-family: 'DM Serif Text', serif;">Dear</h3>
     <h2 class="text-6xl sm:text-9xl mb-4" style="font-family: 'Pinyon Script', serif;">{{$guest->name ?? 'Hello'}}</h2>

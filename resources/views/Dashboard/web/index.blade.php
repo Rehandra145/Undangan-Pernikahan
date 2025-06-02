@@ -61,8 +61,8 @@
                             </svg>
                         </div>
                         <h3 class="font-semibold text-lg mb-2">Lokasi</h3>
-                        <p class="text-gray-700 text-center mb-4">{{ $event->place }}</p>
-                        <a href="{{ $event->maps }}"
+                        <p class="text-gray-700 text-center mb-4">{{ $event->place ?? ''}}</p>
+                        <a href="{{ $event->maps ?? ''}}"
                             class="text-blue-600 hover:text-blue-800 flex items-center gap-1 mt-auto">
                             <span>Lihat di Maps</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
@@ -84,7 +84,8 @@
                             </svg>
                         </div>
                         <h3 class="font-semibold text-lg mb-2">Tanggal</h3>
-                        <p class="text-gray-700 text-center">{{ $event->date }}</p>
+                        <p class="text-gray-700 text-center"><strong>Akad : </strong>{{ $event->akad_date ?? ''}}</p>
+                        <p class="text-gray-700 text-center"><strong>Resepsi : </strong>{{ $event->resepsi_date ?? ''}}</p>
                     </div>
 
                     <!-- Time Card -->
@@ -97,7 +98,8 @@
                             </svg>
                         </div>
                         <h3 class="font-semibold text-lg mb-2">Waktu</h3>
-                        <p class="text-gray-700 text-center">{{ $event->time }}</p>
+                        <p class="text-gray-700 text-center"><strong>Akad : </strong>{{ $event->akad_time ?? ''}}</p>
+                        <p class="text-gray-700 text-center"><strong>Resepsi : </strong>{{ $event->resepsi_time ?? ''}}</p>
                     </div>
                 </div>
             </div>

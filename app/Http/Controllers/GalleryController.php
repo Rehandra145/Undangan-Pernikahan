@@ -41,7 +41,6 @@ class GalleryController extends Controller
             'user_id' => Auth::id()
         ]);
 
-
         return redirect()->route('galleries.index')->with('success', 'Image uploaded successfully.');
     }
 

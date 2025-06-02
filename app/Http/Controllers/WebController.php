@@ -4,65 +4,130 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use App\Models\Event;
+use Illuminate\Support\Facades\Storage;
 
 class WebController extends Controller
 {
     public function index()
     {
         $pemilik = Auth::id();
-        $event = Event::where("user_id", $pemilik)->first();
-        if (!$event) {
-            $user = Auth::user();
-            $name = $user->name;
-            $formatted_groom_name = "Aqul";
-            $formatted_bride_name = "Nesa";
-            $event = Event::create([
-                'groom_name' => $formatted_groom_name,
-                'bride_name' => $formatted_bride_name,
-                'date' => now()->addMonth()->format('Y-m-d'),
-                'time' => '10:00:00',
-                'place' => 'Lokasi Pernikahan Anda',
-                'maps' => 'https://maps.google.com/',
-                'embed_maps' => '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.6664463015976!2d106.82496361476884!3d-6.1753923955388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2e764b12d%3A0x3d2ad6e1e0e9bcc8!2sMonumen%20Nasional!5e0!3m2!1sid!2sid!4v1621930493243!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>', // Embed default untuk peta
-                'user_id' => Auth::id(),
-            ]);
-        }
+        $event = Event::where('user_id', $pemilik)->first();
+
         return view('dashboard.web.index', compact('event'));
     }
 
-    public function store(Request $request)
+    public function update(Request $request)
     {
-        $request->validate([
-            'groom_name' => 'required|string|max:255',
-            'bride_name' => 'required|string|max:255',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-            'place' => 'required|string|max:255',
-            'maps' => 'required|url',
-            'embed_maps' => 'required|string|max:2000'
+        $validatedData = $request->validate([
+            'groom_name' => 'sometimes|required|string|max:255',
+            'groom_daily_name' => 'sometimes|required|string|max:255',
+            'groom_fathers_name' => 'sometimes|required|string|max:255',
+            'groom_mothers_name' => 'sometimes|required|string|max:255',
+            'bride_name' => 'sometimes|required|string|max:255',
+            'bride_daily_name' => 'sometimes|required|string|max:255',
+            'bride_fathers_name' => 'sometimes|required|string|max:255',
+            'bride_mothers_name' => 'sometimes|required|string|max:255',
+            'akad_date' => 'sometimes|required|date',
+            'resepsi_date' => 'sometimes|required|date',
+            'akad_time' => 'sometimes|required',
+            'resepsi_time' => 'sometimes|required',
+            'place' => 'sometimes|required|string|max:255',
+            'maps' => 'sometimes|required|url',
+            'embed_maps' => 'sometimes|nullable|string|max:2000',
+            'surah' => 'sometimes|required|string|max:255',
+            'ayat' => 'sometimes|required|integer|min:1',
+            'imgBg' => 'sometimes|required|image|mimes:jpeg,png,jpg|max:10000',
+            'MbImgBg' => 'sometimes|required|image|mimes:jpeg,png,jpg|max:10000',
+            'CvImgBg' => 'sometimes|required|image|mimes:jpeg,png,jpg|max:10000',
+            'bgm' => 'sometimes|required|file|mimes:mp3,wav|max:15000',
+            'tujuan' => 'sometimes|required|string|max:5000',
         ]);
 
-        // Ubah huruf pertama setiap kata di 'name' menjadi kapital
-        $formatted_groom_name = ucwords(strtolower($request->groom_name));
-        $formatted_bride_name = ucwords(strtolower($request->bride_name));
+        // Proses upload file dengan cara yang benar
+        $uploadedFiles = [];
 
-        Event::create([
-            'groom_name' => $formatted_groom_name,
-            'bride_name' => $formatted_bride_name,
-            'date' => $request->date,
-            'time' => $request->time,
-            'place' => $request->place,
-            'maps' => $request->maps,
-            'embed_maps' => $request->embed_maps,
-            'user_id' => Auth::id(),
-        ]);
+        if ($request->hasFile('imgBg')) {
+            $imgBg = $request->file('imgBg');
+            $imgBgName = time() . '_desktop_' . $imgBg->getClientOriginalName();
+            $uploadedFiles['imgBg'] = $imgBg->storeAs('events', $imgBgName, 'public');
+        }
 
-        return redirect()->route('web.create')->with('success', 'Event berhasil dibuat');
+        if ($request->hasFile('MbImgBg')) {
+            $mbImgBg = $request->file('MbImgBg');
+            $mbImgBgName = time() . '_mobile_' . $mbImgBg->getClientOriginalName();
+            $uploadedFiles['MbImgBg'] = $mbImgBg->storeAs('events', $mbImgBgName, 'public');
+        }
+
+        if ($request->hasFile('CvImgBg')) {
+            $cvImgBg = $request->file('CvImgBg');
+            $cvImgBgName = time() . '_cover_' . $cvImgBg->getClientOriginalName();
+            $uploadedFiles['CvImgBg'] = $cvImgBg->storeAs('events', $cvImgBgName, 'public');
+        }
+
+        if ($request->hasFile('bgm')) {
+            $bgm = $request->file('bgm');
+            $bgmName = time() . '_bgm_' . $bgm->getClientOriginalName();
+            $uploadedFiles['bgm'] = $bgm->storeAs('events', $bgmName, 'public');
+        }
+
+        // Normalize nama fields
+        $nameFields = [
+            'groom_name',
+            'groom_daily_name',
+            'groom_fathers_name',
+            'groom_mothers_name',
+            'bride_name',
+            'bride_daily_name',
+            'bride_fathers_name',
+            'bride_mothers_name',
+            'surah'
+        ];
+
+        foreach ($validatedData as $key => $value) {
+            if (in_array($key, $nameFields) && $value) {
+                $validatedData[$key] = ucwords(strtolower($value));
+            }
+        }
+
+        $existingEvent = Event::where('user_id', Auth::id())->first();
+
+        $eventData = $validatedData;
+
+        if (!empty($uploadedFiles)) {
+            $eventData = array_merge($eventData, $uploadedFiles);
+
+            if ($existingEvent) {
+                foreach ($uploadedFiles as $field => $newPath) {
+                    if ($existingEvent->$field && Storage::disk('public')->exists($existingEvent->$field)) {
+                        Storage::disk('public')->delete($existingEvent->$field);
+                    }
+                }
+            }
+        }
+
+        Event::updateOrCreate(
+            ['user_id' => Auth::id()],
+            $eventData
+        );
+
+        return redirect()->route('web.create')->with('success', 'Event berhasil diperbarui.');
     }
 
     public function create()
     {
-        return view('dashboard.web.create');
+        $response = Http::get('https://api.alquran.cloud/v1/surah');
+        $surahs = $response->json('data');
+        $event = Event::where('user_id', Auth::id())->first();
+        return view('dashboard.web.create', compact('event', 'surahs'));
     }
+
+    public function getAyat($surahNumber)
+{
+    $response = Http::get("https://api.alquran.cloud/v1/surah/{$surahNumber}");
+    $ayahs = $response->json('data.ayahs');
+
+    return response()->json($ayahs);
+}
 }
